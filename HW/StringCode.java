@@ -39,31 +39,26 @@ public class StringCode {
 	 * @return blown up string
 	 */
 	public static String blowup(String str) {
-		String s = new String();
-		for(int i = 1; i < str.length(); i++){
-			if(str.charAt(i-1) >= '0' && str.charAt(i-1) <= '9'){
-				int m = Character.getNumericValue(str.charAt(i-1));
-				if(!Character.isDigit(str.charAt(i))){
-					s += (str.charAt(i));
-				}
-				for(int j = 1; j <= m; j++){
-					s += (str.charAt(i));
-				}
+		StringBuilder s = new StringBuilder();
+		for(int i = 0; i < str.length(); i++){
+			if(!Character.isDigit(str.charAt(i))){
+				s.append(str.charAt(i));
 			}
 			else{
-				if(i-1 == 0){
-					s += (str.charAt(i-1));
-				}
-				else if(!Character.isDigit(str.charAt(i-2)))
-					s += str.charAt(i-1);
-				 if(i == str.length()-1){
+				if(i == str.length()-1){
 					if(!Character.isDigit(str.charAt(i))){
-						s += (str.charAt(i));
+						s.append(str.charAt(i));
+					}
+				}
+				else {
+					int m = Character.getNumericValue(str.charAt(i));
+					for (int j = 1; j <= m; j++) {
+						s.append(str.charAt(i + 1));
 					}
 				}
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
 	/**
